@@ -25,7 +25,7 @@
         .status-uzbaigtas, .status-patvirtinta { background-color: #28a745; }
         .status-laukia-dok { background-color: #dc3545; }
         .status-vykdomas { background-color: #fd7e14; }
-        .status-atviras { background-color: #6c757d; }
+        .status-nepasirasytas { background-color: #6c757d; }
         .status-galima { background-color: #17a2b8; }
         .status-israsyta { background-color: #007bff; }
         .status-laukia-saskaitos { background-color: #ff9800; }
@@ -37,7 +37,7 @@
         .summary-card .count { font-size: 2.5rem; font-weight: 700; display: block; margin-bottom: 5px; }
         .summary-card .title { font-size: 0.9rem; font-weight: 600; color: #64748b; }
         .summary-card.all { border-left: 5px solid #64748b; } .summary-card.all .count { color: #64748b; }
-        .summary-card.atviras { border-left: 5px solid #6c757d; } .summary-card.atviras .count { color: #6c757d; }
+        .summary-card.nepasirasytas { border-left: 5px solid #6c757d; } .summary-card.nepasirasytas .count { color: #6c757d; }
         .summary-card.vykdomas { border-left: 5px solid #fd7e14; } .summary-card.vykdomas .count { color: #fd7e14; }
         .summary-card.laukia-saskaitos { border-left: 5px solid #ff9800; } .summary-card.laukia-saskaitos .count { color: #ff9800; }
         .summary-card.laukia-dok { border-left: 5px solid #dc3545; } .summary-card.laukia-dok .count { color: #dc3545; }
@@ -75,7 +75,7 @@
                 <h2>Visi Užsakymai (Vadovo Skydelis)</h2>
                 <div class="summary-cards">
                     <div class="summary-card all" onclick="filterTableByStatus('all')"><span class="count">6</span><span class="title">Iš viso</span></div>
-                    <div class="summary-card atviras" onclick="filterTableByStatus('atviras')"><span class="count">1</span><span class="title">Atviras</span></div>
+                    <div class="summary-card nepasirasytas" onclick="filterTableByStatus('nepasirasytas')"><span class="count">1</span><span class="title">Nepasirašyta</span></div>
                     <div class="summary-card vykdomas" onclick="filterTableByStatus('vykdomas')"><span class="count">1</span><span class="title">Vykdomas</span></div>
                     <div class="summary-card laukia-saskaitos" onclick="filterTableByStatus('laukia-saskaitos')"><span class="count">1</span><span class="title">Laukia pirk. sąsk.</span></div>
                     <div class="summary-card laukia-dok" onclick="filterTableByStatus('laukia-dok')"><span class="count">1</span><span class="title">Laukia dokumentų</span></div>
@@ -94,7 +94,7 @@
             <table id="orders-table">
                 <thead><tr><th>Bendra Būsena</th><th>Užsak. Nr.</th><th>Užsakymo Data</th><th>Krovinys</th><th>Maršrutas</th><th>Vežėjas</th><th>Pirkimo Kaina</th><th>Pardavimo Sąskaitos Nr.</th></tr></thead>
                 <tbody>
-                    <tr class="clickable-row order-row" data-status="atviras" id="order-row-46266" onclick="openModal('modal-46266')"><td><span class="status status-atviras">Atviras</span></td><td>#46266</td><td>2025/07/30</td><td>biodiesel</td><td>Hamburg (DE) &rarr; Pagiriai (LT)</td><td>TPG-LOGISTIC</td><td>2000.00 EUR</td><td>-</td></tr>
+                    <tr class="clickable-row order-row" data-status="nepasirasytas" id="order-row-46266" onclick="openModal('modal-46266')"><td><span class="status status-nepasirasytas">Nepasirašyta</span></td><td>#46266</td><td>2025/07/30</td><td>biodiesel</td><td>Hamburg (DE) &rarr; Pagiriai (LT)</td><td>TPG-LOGISTIC</td><td>2000.00 EUR</td><td>-</td></tr>
                     <tr class="clickable-row order-row" data-status="vykdomas" id="order-row-46082" onclick="openModal('modal-46082')"><td><span class="status status-vykdomas">Vykdomas</span></td><td>#46082</td><td>2025/07/17</td><td>Equipment</td><td>Tilburg (NL) &rarr; San Pietro (IT)</td><td>E. Van Wijk Srl</td><td>1500.00 EUR</td><td>-</td></tr>
                     <tr class="clickable-row order-row" data-status="laukia-dok" id="order-row-45896" onclick="openModal('modal-45896')"><td><span class="status status-laukia-dok">Laukia dokumentų</span></td><td>#45896</td><td>2025/07/03</td><td>biodiesel</td><td>Usti n. Labem (CZ) &rarr; Rotterdam (NL)</td><td>UAB Viknetos logistika</td><td>1272.00 EUR</td><td>-</td></tr>
                     <tr class="clickable-row order-row" data-status="laukia-saskaitos" id="order-row-46148" onclick="openModal('modal-46148')"><td><span class="status status-laukia-saskaitos">Laukia pirk. sąskaitos</span></td><td>#46148</td><td>2025/07/22</td><td>biodyzelinas</td><td>Mainz (DE) &rarr; Pardubice (CZ)</td><td>EUROCORP TRADE s.r.o</td><td>1008.00 EUR</td><td>-</td></tr>
