@@ -27,6 +27,7 @@
         .status-atviras { background-color: #6c757d; }
         .status-galima { background-color: #17a2b8; }
         .status-israsyta { background-color: #007bff; }
+        .status-neatpazinta { background-color: #ffc107; color: #212529;}
         .action-button { color: white; padding: 8px 12px; text-decoration: none; border-radius: 5px; border: none; cursor: pointer; font-size: 1em; margin-right: 5px; }
         .action-button.issue { background-color: #007bff; }
         .link { color: #007bff; font-weight: bold; text-decoration: none; }
@@ -54,20 +55,9 @@
         </nav>
         
         <div id="tab-uzsakymai" class="tab-content active">
-            <h2>Visi Užsakymai (Vadovo Skydelis)</h2>
+             <h2>Visi Užsakymai (Vadovo Skydelis)</h2>
             <table id="orders-table">
-                <thead>
-                    <tr>
-                        <th>Bendra Būsena</th>
-                        <th>Užsak. Nr.</th>
-                        <th>Užsakymo Data</th>
-                        <th>Krovinys</th>
-                        <th>Maršrutas</th>
-                        <th>Vežėjas</th>
-                        <th>Pirkimo Kaina</th>
-                        <th>Pardavimo Sąskaitos Nr.</th>
-                    </tr>
-                </thead>
+                <thead><tr><th>Bendra Būsena</th><th>Užsak. Nr.</th><th>Užsakymo Data</th><th>Krovinys</th><th>Maršrutas</th><th>Vežėjas</th><th>Pirkimo Kaina</th><th>Pardavimo Sąskaitos Nr.</th></tr></thead>
                 <tbody>
                     <tr class="clickable-row" id="order-row-46266" onclick="openModal('modal-46266')"><td><span class="status status-atviras">Atviras</span></td><td>#46266</td><td>2025-07-30</td><td>biodiesel</td><td>Hamburg (DE) &rarr; Pagiriai (LT)</td><td>TPG-LOGISTIC</td><td>2000.00 EUR</td><td>-</td></tr>
                     <tr class="clickable-row" id="order-row-46148" onclick="openModal('modal-46148')"><td><span class="status status-vykdomas">Vykdomas</span></td><td>#46148</td><td>2025-07-22</td><td>biodyzelinas</td><td>Mainz (DE) &rarr; Pardubice (CZ)</td><td>EUROCORP TRADE s.r.o</td><td>1008.00 EUR</td><td>-</td></tr>
@@ -82,7 +72,7 @@
         <div id="tab-cmr" class="tab-content">
             <h2>Gautų CMR Registras</h2>
             <table>
-                <thead><tr><th>CMR Numeris</th><th>Gavimo Data</th><th>Susijęs Užsakymas</th><th>Siuntėjas</th><th>Vežėjas</th><th>Gavimo patvirtinimas</th></tr></thead>
+                 <thead><tr><th>CMR Numeris</th><th>Gavimo Data</th><th>Susijęs Užsakymas</th><th>Siuntėjas</th><th>Vežėjas</th><th>Gavimo patvirtinimas</th></tr></thead>
                 <tbody>
                     <tr><td>CZ-RO-5512</td><td>2025-07-10</td><td><a href="#" class="link" onclick="openModal('modal-45896')">#45896</a></td><td>Company Chemoprojekt</td><td>UAB Viknetos logistika</td><td><span class="status status-patvirtinta">Patvirtinta</span></td></tr>
                     <tr><td>3P1868/2025</td><td>2025-07-28</td><td><a href="#" class="link" onclick="openModal('modal-46138')">#46138</a></td><td>3 FUEL 2020 SRL</td><td>UAB "Viknetos logistika"</td><td><span class="status status-patvirtinta">Patvirtinta</span></td></tr>
@@ -93,17 +83,27 @@
         <div id="tab-saskaitos" class="tab-content">
             <h2>Gautų Pirkimo Sąskaitų Registras</h2>
             <table>
-                <thead><tr><th>Sąskaitos Nr.</th><th>Data</th><th>Tiekėjas</th><th>Bendra Suma</th><th>Susijęs Užsakymas</th><th>Statusas</th></tr></thead>
+                <thead>
+                    <tr>
+                        <th>Sąskaitos Nr.</th>
+                        <th>Data</th>
+                        <th>Tiekėjas</th>
+                        <th>Bendra Suma</th>
+                        <th>Susijęs Užsakymas</th>
+                        <th>Susijęs CMR</th>
+                        <th>Statusas</th>
+                    </tr>
+                </thead>
                 <tbody>
-                    <tr><td>VIK-2025-07-09</td><td>2025-07-10</td><td>UAB Viknetos logistika</td><td>1541.12 EUR</td><td><a class="link" onclick="openModal('modal-45896')">#45896</a></td><td><span class="status status-patvirtinta">Patvirtinta</span></td></tr>
-                    <tr><td>VKN nr 25/07/28</td><td>2025-07-28</td><td>UAB "VIKNETOS LOGISTIKA"</td><td>1 257,80 EUR</td><td><a class="link" onclick="openModal('modal-46138')">#46138</a></td><td><span class="status status-patvirtinta">Patvirtinta</span></td></tr>
-                    <tr><td>RAB-CZ-08-02</td><td>2025-08-02</td><td>Raben Lietuva</td><td>1452,00 EUR</td><td><a class="link" onclick="openModal('modal-46027')">#46027</a></td><td><span class="status status-patvirtinta">Patvirtinta</span></td></tr>
+                    <tr><td>VIK-2025-07-09</td><td>2025-07-10</td><td>UAB Viknetos logistika</td><td>1541.12 EUR</td><td><a class="link" onclick="openModal('modal-45896')">#45896</a></td><td><a class="link" onclick="alert('Atidaromas CMR CZ-RO-5512 failas...')">CZ-RO-5512</a></td><td><span class="status status-patvirtinta">Patvirtinta</span></td></tr>
+                    <tr><td>VKN nr 25/07/28</td><td>2025-07-28</td><td>UAB "VIKNETOS LOGISTIKA"</td><td>1 257,80 EUR</td><td><a class="link" onclick="openModal('modal-46138')">#46138</a></td><td><a class="link" onclick="alert('Atidaromas CMR 3P1868/2025 failas...')">3P1868/2025</a></td><td><span class="status status-patvirtinta">Patvirtinta</span></td></tr>
+                    <tr><td>RAB-CZ-08-02</td><td>2025-08-02</td><td>Raben Lietuva</td><td>1452,00 EUR</td><td><a class="link" onclick="openModal('modal-46027')">#46027</a></td><td><a class="link" onclick="alert('Atidaromas CMR DE5491/2025 failas...')">DE5491/2025</a></td><td><span class="status status-patvirtinta">Patvirtinta</span></td></tr>
+                    <tr><td>UNKNOWN-001</td><td>2025-08-05</td><td>Nežinomas tiekėjas</td><td>500.00 EUR</td><td>-</td><td>-</td><td><span class="status status-neatpazinta">Neatpažinta</span></td></tr>
                 </tbody>
             </table>
         </div>
         <div id="tab-buhalterija" class="tab-content">
-            <h2>Buhalterijos Skydelis</h2>
-            <p>Užsakymai, kuriems galima išrašyti pardavimo sąskaitas.</p>
+             <h2>Buhalterijos Skydelis</h2>
             <table id="buhalterija-table">
                 <thead><tr><th>Užsakymo Nr.</th><th>Klientas</th><th>Pardavimo Suma</th><th>Sąskaitos Statusas</th><th>Veiksmai</th></tr></thead>
                 <tbody>
@@ -122,11 +122,11 @@
         </div>
     </div>
     
-    <div id="modal-45896" class="modal"><div class="modal-content"><span class="close-button" onclick="closeModal('modal-45896')">&times;</span><h2>Užsakymo #45896 Detalės</h2><div class="details-section"><h3>Bendra informacija</h3><div class="details-grid"><div><strong>Krovinys:</strong> biodiesel</div><div><strong>Maršrutas:</strong> Usti n. Labem (CZ) &rarr; Rotterdam (NL)</div><div><strong>Vežėjas:</strong> UAB Viknetos logistika</div></div></div><div class="details-section"><h3>Susiję Dokumentai</h3><div class="details-grid"><div><h3>CMR</h3><p><strong>Statusas:</strong> <span class="status status-patvirtinta">Patvirtinta</span></p><p><strong>Numeris:</strong> CZ-RO-5512</p></div><div><h3>Pirkimo Sąskaita</h3><p><strong>Statusas:</strong> <span class="status status-patvirtinta">Patvirtinta</span></p><p><strong>Numeris:</strong> VIK-2025-07-09</p></div><div><h3>Pardavimo Sąskaita</h3><p><strong>Statusas:</strong> <span class="status status-galima">Galima išrašyti</span></p></div></div></div></div></div>
-    <div id="modal-46266" class="modal"></div><div id="modal-46148" class="modal"></div><div id="modal-46082" class="modal"></div><div id="modal-46027" class="modal"></div><div id="modal-46138" class="modal"></div>
+    <div id="modal-46266" class="modal"></div><div id="modal-46148" class="modal"></div><div id="modal-46082" class="modal"></div><div id="modal-45896" class="modal"><div class="modal-content"><span class="close-button" onclick="closeModal('modal-45896')">&times;</span><h2>Užsakymo #45896 Detalės</h2><div class="details-section"><h3>Bendra informacija</h3><div class="details-grid"><div><strong>Krovinys:</strong> biodiesel</div><div><strong>Maršrutas:</strong> Usti n. Labem (CZ) &rarr; Rotterdam (NL)</div><div><strong>Vežėjas:</strong> UAB Viknetos logistika</div></div></div><div class="details-section"><h3>Susiję Dokumentai</h3><div class="details-grid"><div><h3>CMR</h3><p><strong>Statusas:</strong> <span class="status status-patvirtinta">Patvirtinta</span></p><p><strong>Numeris:</strong> CZ-RO-5512</p></div><div><h3>Pirkimo Sąskaita</h3><p><strong>Statusas:</strong> <span class="status status-patvirtinta">Patvirtinta</span></p><p><strong>Numeris:</strong> VIK-2025-07-09</p></div><div><h3>Pardavimo Sąskaita</h3><p><strong>Statusas:</strong> <span class="status status-galima">Galima išrašyti</span></p></div></div></div></div></div><div id="modal-46027" class="modal"></div><div id="modal-46138" class="modal"></div>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
+       // Visas JavaScript kodas lieka nepakitęs
+       document.addEventListener("DOMContentLoaded", function() {
             const tabLinks = document.querySelectorAll('.tab-link');
             const tabContents = document.querySelectorAll('.tab-content');
             tabLinks.forEach(link => {link.addEventListener('click', e => { e.preventDefault(); const tabId = link.getAttribute('data-tab'); tabLinks.forEach(l => l.classList.remove('active')); tabContents.forEach(c => c.classList.remove('active')); link.classList.add('active'); document.getElementById(tabId).classList.add('active'); }); });
