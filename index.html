@@ -44,7 +44,7 @@
         .summary-card.galima { border-left: 5px solid #17a2b8; } .summary-card.galima .count { color: #17a2b8; }
         .summary-card.uzbaigtas { border-left: 5px solid #28a745; } .summary-card.uzbaigtas .count { color: #28a745; }
         .filter-bar { display: flex; gap: 15px; background-color: #f8fafc; padding: 15px; border-radius: 12px; border: 1px solid #e2e8f0; }
-        .filter-bar input, .filter-bar select, .filter-bar button { font-size: 0.9rem; padding: 8px 12px; border-radius: 8px; border: 1px solid #cbd5e1; }
+        .filter-bar input, .filter-bar select, .filter-bar button { font-size: 0.9rem; padding: 8px 12px; border-radius: 8px; border: 1px solid #cbd5e1; font-family: inherit; }
         .filter-bar button { background-color: #007bff; color: white; cursor: pointer; border-color: #007bff; }
         .link { color: #007bff; font-weight: bold; text-decoration: none; }
         .link:hover { text-decoration: underline; cursor: pointer; }
@@ -85,8 +85,8 @@
                 <div class="filter-bar">
                     <input type="search" placeholder="Ieškoti pagal Nr., krovinį...">
                     <select><option>Visi vežėjai</option><option>TPG-LOGISTIC</option><option>E. Van Wijk Srl</option></select>
-                    <input type="date" title="Data nuo">
-                    <input type="date" title="Data iki">
+                    <input type="text" placeholder="yyyy/mm/dd" title="Data nuo">
+                    <input type="text" placeholder="yyyy/mm/dd" title="Data iki">
                     <button>Filtruoti</button>
                 </div>
             </div>
