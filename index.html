@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="lt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PERVEŽIMO UŽSAKYMŲ VALDYMAS</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background-color: #f8f9fa; color: #343a40; margin: 0; padding: 20px; }
+        .container { max-width: 95%; margin: auto; background: #fff; padding: 25px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+        h1, h2, h3 { color: #2c3e50; padding-bottom: 10px; }
+        h1 { text-align: center; border-bottom: none; font-size: 2.2em; margin-bottom: 20px; }
+        h2 { border-bottom: 2px solid #007bff; font-size: 1.5em; }
+        .tab-nav { border-bottom: 2px solid #dee2e6; display: flex; flex-wrap: wrap; }
+        .tab-nav a { display: block; padding: 12px 20px; color: #495057; text-decoration: none; font-weight: 600; border: 1px solid transparent; border-bottom: none; margin-bottom: -2px; }
+        .tab-nav a.active { color: #007bff; border-color: #dee2e6; border-bottom: 2px solid #fff; border-radius: 8px 8px 0 0; background: #fff; }
+        .tab-content { display: none; padding-top: 20px; }
+        .tab-content.active { display: block; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; font-size: 0.8em; }
+        th, td { border: 1px solid #dee2e6; padding: 10px; text-align: left; vertical-align: middle; }
+        th { background-color: #e9ecef; font-weight: 600; color: #495057; }
+        .clickable-row { cursor: pointer; }
+        .clickable-row:hover { background-color: #f1f3f5; }
+        .status { padding: 5px 12px; border-radius: 15px; color: #fff; font-weight: bold; text-align: center; display: inline-block; font-size: 0.95em; white-space: nowrap; }
+        .status-uzbaigtas, .status-patvirtinta { background-color: #28a745; }
+        .status-laukia { background-color: #dc3545; }
+        .status-vykdomas { background-color: #fd7e14; }
+        .status-atviras { background-color: #6c757d; }
+        .status-galima { background-color: #17a2b8; }
+        .status-israsyta { background-color: #007bff; }
+        .action-button { color: white; padding: 8px 12px; text-decoration: none; border-radius: 5px; border: none; cursor: pointer; font-size: 1em; margin-right: 5px; }
+        .action-button.issue { background-color: #007bff; }
+        .link { color: #007bff; font-weight: bold; text-decoration: none; }
+        .link:hover { text-decoration: underline; cursor: pointer; }
+        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.6); }
+        .modal-content { background-color: #fefefe; margin: 5% auto; padding: 25px; border: 1px solid #888; width: 85%; max-width: 1100px; border-radius: 8px; position: relative; box-shadow: 0 5px 20px rgba(0,0,0,0.3); animation: slideIn 0.4s; }
+        .close-button { color: #aaa; float: right; font-size: 32px; font-weight: bold; line-height: 1; cursor: pointer; }
+        .details-section { background: #f8f9fa; padding: 20px; margin-top: 20px; border-left: 5px solid #007bff; border-radius: 5px; }
+        .details-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; }
+        .details-grid div { background: #fff; padding: 15px; border-radius: 5px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+        .details-grid h3 { margin-top: 0; font-size: 1.2em; color: #343a40; border-bottom: 1px solid #eee; padding-bottom: 8px; }
+        @keyframes slideIn { from {top: -100px; opacity: 0} to {top: 0; opacity: 1} }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>UŽSAKYMŲ VALDYMO SISTEMA</h1>
+        <nav class="tab-nav">
+            <a href="#" class="tab-link active" data-tab="tab-uzsakymai">Užsakymai</a>
+            <a href="#" class="tab-link" data-tab="tab-cmr">CMR Registras</a>
+            <a href="#" class="tab-link" data-tab="tab-saskaitos">Pirkimo Sąskaitų Registras</a>
+            <a href="#" class="tab-link" data-tab="tab-buhalterija">Buhalterija</a>
+            <a href="#" class="tab-link" data-tab="tab-pardavimai">Pardavimo Sąskaitų Registras</a>
+        </nav>
+        
+        <div id="tab-uzsakymai" class="tab-content active">
+            <h2>Visi Užsakymai (Vadovo Skydelis)</h2>
+            <table id="orders-table">
+                <thead>
+                    <tr>
+                        <th>Bendra Būsena</th>
+                        <th>Užsak. Nr.</th>
+                        <th>Užsakymo Data</th>
+                        <th>Krovinys</th>
+                        <th>Maršrutas</th>
+                        <th>Vežėjas</th>
+                        <th>Pirkimo Kaina</th>
+                        <th>Pardavimo Sąskaitos Nr.</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="clickable-row" onclick="openModal('modal-46266')"><td><span class="status status-atviras">Atviras</span></td><td>#46266</td><td>2025-07-30</td><td>biodiesel</td><td>Hamburg (DE) &rarr; Pagiriai (LT)</td><td>TPG-LOGISTIC</td><td>2000.00 EUR</td><td>-</td></tr>
+                    <tr class="clickable-row" onclick="openModal('modal-46148')"><td><span class="status status-vykdomas">Vykdomas</span></td><td>#46148</td><td>2025-07-22</td><td>biodyzelinas</td><td>Mainz (DE) &rarr; Pardubice (CZ)</td><td>EUROCORP TRADE s.r.o</td><td>1008.00 EUR</td><td>-</td></tr>
+                    <tr class="clickable-row" onclick="openModal('modal-46082')"><td><span class="status status-vykdomas">Vykdomas</span></td><td>#46082</td><td>2025-07-17</td><td>Equipment</td><td>Tilburg (NL) &rarr; San Pietro (IT)</td><td>E. Van Wijk Srl</td><td>1500.00 EUR</td><td>-</td></tr>
+                    <tr class="clickable-row" onclick="openModal('modal-45896')"><td><span class="status status-laukia">Laukia dokumentų</span></td><td>#45896</td><td>2025-07-03</td><td>biodiesel</td><td>Usti n. Labem (CZ) &rarr; Rotterdam (NL)</td><td>UAB Viknetos logistika</td><td>1272.00 EUR</td><td>-</td></tr>
+                    <tr class="clickable-row" onclick="openModal('modal-46027')"><td><span class="status status-galima">Galima išrašyti sąskaitą</span></td><td>#46027</td><td>2025-07-14</td><td>Nepavojinga chemija</td><td>Bozicany (CZ) &rarr; Viečiūnai (LT)</td><td>Nenurodyta</td><td>1200.00 EUR</td><td>-</td></tr>
+                    <tr class="clickable-row" onclick="openModal('modal-46138')"><td><span class="status status-uzbaigtas">Užbaigtas</span></td><td>#46138</td><td>2025-07-22</td><td>Biodyzelinas</td><td>Mainz (DE) &rarr; Dordrecht (NL)</td><td>UAB "Viknetos logistika"</td><td>1008.00 EUR</td><td>URS-2025-08-01</td></tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div id="tab-cmr" class="tab-content">
+            <h2>Gautų CMR Registras</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>CMR Numeris</th>
+                        <th>Gavimo Data</th>
+                        <th>Susijęs Užsakymas</th>
+                        <th>Siuntėjas</th>
+                        <th>Vežėjas</th>
+                        <th>Gavimo patvirtinimas</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>3P1868/2025</td><td>2025-07-28</td><td><a href="#" class="link" onclick="openModal('modal-46138')">#46138</a></td><td>3 FUEL 2020 SRL</td><td>UAB "Viknetos logistika"</td><td><span class="status status-patvirtinta">Patvirtinta</span></td></tr>
+                    <tr><td>DE5491/2025</td><td>2025-08-01</td><td><a href="#" class="link" onclick="openModal('modal-46027')">#46027</a></td><td>Sedlecký kaolin a.s.</td><td>Nenurodyta</td><td><span class="status status-patvirtinta">Patvirtinta</span></td></tr>
+                </tbody>
+            </table>
+        </div>
+        <div id="tab-saskaitos" class="tab-content">
+            <h2>Gautų Pirkimo Sąskaitų Registras</h2>
+            <table>
+                <thead><tr><th>Sąskaitos Nr.</th><th>Data</th><th>Tiekėjas</th><th>Bendra Suma</th><th>Susijęs Užsakymas</th><th>Statusas</th></tr></thead>
+                <tbody>
+                    <tr><td>VKN nr 25/07/28</td><td>2025-07-28</td><td>UAB "VIKNETOS LOGISTIKA"</td><td>1 257,80 EUR</td><td><a class="link" onclick="openModal('modal-46138')">#46138</a></td><td><span class="status status-patvirtinta">Patvirtinta</span></td></tr>
+                    <tr><td>RAB-CZ-08-02</td><td>2025-08-02</td><td>Raben Lietuva</td><td>1452,00 EUR</td><td><a class="link" onclick="openModal('modal-46027')">#46027</a></td><td><span class="status status-patvirtinta">Patvirtinta</span></td></tr>
+                </tbody>
+            </table>
+        </div>
+        <div id="tab-buhalterija" class="tab-content">
+            <h2>Buhalterijos Skydelis</h2>
+            <p>Užsakymai, kuriems galima išrašyti pardavimo sąskaitas.</p>
+            <table id="buhalterija-table">
+                <thead><tr><th>Užsakymo Nr.</th><th>Klientas</th><th>Pardavimo Suma</th><th>Sąskaitos Statusas</th><th>Veiksmai</th></tr></thead>
+                <tbody>
+                    <tr id="buh-row-46027"><td><a href="#" class="link" onclick="openModal('modal-46027')">#46027</a></td><td>Raben Lietuva</td><td>1450.00 EUR</td><td class="status-cell"><span class="status status-galima">Galima išrašyti</span></td><td class="action-cell"><button class="action-button issue" onclick="issueInvoice('46027', 'URS-2025-08-02', 'Raben Lietuva', 1450.00)">Išrašyti</button></td></tr>
+                    <tr id="buh-row-46138-done"><td><a href="#" class="link" onclick="openModal('modal-46138')">#46138</a></td><td>TOTSA TotalEnergies</td><td>1250.00 EUR</td><td class="status-cell"><span class="status status-israsyta">Išrašyta</span></td><td class="action-cell"><strong>URS-2025-08-01</strong></td></tr>
+                </tbody>
+            </table>
+        </div>
+        <div id="tab-pardavimai" class="tab-content">
+            <h2>Pardavimo Sąskaitų Registras</h2>
+            <table id="pardavimai-table">
+                <thead><tr><th>Pardavimo Sąskaitos Nr.</th><th>Data</th><th>Klientas</th><th>Suma</th><th>Susijęs Užsakymas</th><th>Statusas</th></tr></thead>
+                <tbody><tr id="sales-invoice-46138"><td>URS-2025-08-01</td><td>2025-08-07</td><td>TOTSA TotalEnergies</td><td>1250.00 EUR</td><td><a href="#" class="link" onclick="openModal('modal-46138')">#46138</a></td><td><span class="status status-israsyta">Išsiųsta</span></td></tr></tbody>
+            </table>
+        </div>
+    </div>
+    
+    <div id="modal-46266" class="modal"><div class="modal-content"><span class="close-button" onclick="closeModal('modal-46266')">&times;</span><h2>Užsakymo #46266 Detalės</h2><div class="details-section"><h3>Bendra informacija</h3><div class="details-grid"><div><strong>Krovinys:</strong> biodiesel</div><div><strong>Maršrutas:</strong> Hamburg (DE) &rarr; Pagiriai (LT)</div><div><strong>Vežėjas:</strong> TPG-LOGISTIC</div><div><strong>Pakrovimo data:</strong> 2025-08-04</div></div></div><div class="details-section"><h3>Susiję Dokumentai</h3><p>Užsakymas dar nepradėtas vykdyti.</p></div></div></div>
+    <div id="modal-46148" class="modal"><div class="modal-content"><span class="close-button" onclick="closeModal('modal-46148')">&times;</span><h2>Užsakymo #46148 Detalės</h2><div class="details-section"><h3>Bendra informacija</h3><div class="details-grid"><div><strong>Krovinys:</strong> biodyzelinas</div><div><strong>Maršrutas:</strong> Mainz (DE) &rarr; Pardubice (CZ)</div><div><strong>Vežėjas:</strong> EUROCORP TRADE s.r.o</div><div><strong>Pakrovimo data:</strong> 2025-07-29</div></div></div><div class="details-section"><h3>Susiję Dokumentai</h3><p>Užsakymas vykdomas. Dokumentai bus gauti po pristatymo.</p></div></div></div>
+    <div id="modal-46082" class="modal"><div class="modal-content"><span class="close-button" onclick="closeModal('modal-46082')">&times;</span><h2>Užsakymo #46082 Detalės</h2><div class="details-section"><h3>Bendra informacija</h3><div class="details-grid"><div><strong>Krovinys:</strong> Equipment</div><div><strong>Maršrutas:</strong> Tilburg (NL) &rarr; San Pietro (IT)</div><div><strong>Vežėjas:</strong> E. Van Wijk Srl</div><div><strong>Pakrovimo data:</strong> 2025-07-18</div></div></div><div class="details-section"><h3>Susiję Dokumentai</h3><div class="details-grid"><div><h3>CMR</h3><p><strong>Statusas:</strong> <span class="status status-laukia">Laukiama</span></p></div><div><h3>Pirkimo Sąskaita</h3><p><strong>Statusas:</strong> <span class="status status-laukia">Laukiama</span></p></div></div></div></div></div>
+    <div id="modal-45896" class="modal"><div class="modal-content"><span class="close-button" onclick="closeModal('modal-45896')">&times;</span><h2>Užsakymo #45896 Detalės</h2><div class="details-section"><h3>Bendra informacija</h3><div class="details-grid"><div><strong>Krovinys:</strong> biodiesel</div><div><strong>Maršrutas:</strong> Usti n. Labem (CZ) &rarr; Rotterdam (NL)</div><div><strong>Vežėjas:</strong> UAB Viknetos logistika</div><div><strong>Pristatymo data:</strong> 2025-07-07</div></div></div><div class="details-section"><h3>Susiję Dokumentai</h3><div class="details-grid"><div><h3>CMR</h3><p><strong>Statusas:</strong> <span class="status status-laukia">Laukiama</span></p></div><div><h3>Pirkimo Sąskaita</h3><p><strong>Statusas:</strong> <span class="status status-laukia">Laukiama</span></p></div></div></div></div></div>
+    <div id="modal-46027" class="modal"><div class="modal-content"><span class="close-button" onclick="closeModal('modal-46027')">&times;</span><h2>Užsakymo #46027 Detalės</h2><div class="details-section"><h3>Bendra informacija</h3><div class="details-grid"><div><strong>Krovinys:</strong> Nepavojinga chemija</div><div><strong>Maršrutas:</strong> Bozicany (CZ) &rarr; Viečiūnai (LT)</div><div><strong>Vežėjas:</strong> Nenurodyta</div></div></div><div class="details-section"><h3>Susiję Dokumentai</h3><div class="details-grid"><div><h3>CMR</h3><p><strong>Statusas:</strong> <span class="status status-patvirtinta">Patvirtinta</span></p><p><strong>Numeris:</strong> DE5491/2025</p></div><div><h3>Pirkimo Sąskaita</h3><p><strong>Statusas:</strong> <span class="status status-patvirtinta">Patvirtinta</span></p><p><strong>Numeris:</strong> RAB-CZ-08-02</p></div><div><h3>Pardavimo Sąskaita</h3><p><strong>Statusas:</strong> <span class="status status-galima">Galima išrašyti</span></p></div></div></div></div></div>
+    <div id="modal-46138" class="modal"><div class="modal-content"><span class="close-button" onclick="closeModal('modal-46138')">&times;</span><h2>Užsakymo #46138 Detalės</h2><div class="details-section"><h3>Bendra informacija</h3><div class="details-grid"><div><strong>Krovinys:</strong> Biodyzelinas</div><div><strong>Maršrutas:</strong> Mainz (DE) &rarr; Dordrecht (NL)</div><div><strong>Vežėjas:</strong> UAB "Viknetos logistika"</div></div></div><div class="details-section"><h3>Susiję Dokumentai</h3><div class="details-grid"><div><h3>CMR</h3><p><strong>Statusas:</strong> <span class="status status-patvirtinta">Patvirtinta</span></p><p><strong>Numeris:</strong> 3P1868/2025</p></div><div><h3>Pirkimo Sąskaita</h3><p><strong>Statusas:</strong> <span class="status status-patvirtinta">Patvirtinta</span></p><p><strong>Numeris:</strong> VKN nr 25/07/28</p></div><div><h3>Pardavimo Sąskaita</h3><p><strong>Statusas:</strong> <span class="status status-israsyta">Išrašyta</span></p><p><strong>Numeris:</strong> URS-2025-08-01</p></div></div></div></div></div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const tabLinks = document.querySelectorAll('.tab-link');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabLinks.forEach(link => {
+                link.addEventListener('click', e => {
+                    e.preventDefault();
+                    const tabId = link.getAttribute('data-tab');
+                    
+                    tabLinks.forEach(l => l.classList.remove('active'));
+                    tabContents.forEach(c => c.classList.remove('active'));
+                    
+                    link.classList.add('active');
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+
+            // Activate the first tab by default
+            if (document.querySelector('.tab-link')) {
+                document.querySelector('.tab-link').click();
+            }
+        });
+
+        function openModal(modalId) { const modal = document.getElementById(modalId); if(modal) modal.style.display = "block"; }
+        function closeModal(modalId) { const modal = document.getElementById(modalId); if(modal) modal.style.display = "none"; }
+
+        window.onclick = function(event) { if (event.target.classList.contains('modal')) { event.target.style.display = "none"; } }
+
+        function issueInvoice(orderId, invoiceNumber, clientName, amount) { 
+            const buhRow = document.getElementById('buh-row-' + orderId); 
+            if (buhRow) { 
+                buhRow.querySelector('.status-cell').innerHTML = `<span class="status status-israsyta">Išrašyta</span>`; 
+                buhRow.querySelector('.action-cell').innerHTML = `<strong>${invoiceNumber}</strong>`; 
+            } 
+            const salesTable = document.getElementById('pardavimai-table').getElementsByTagName('tbody')[0]; 
+            const newRow = salesTable.insertRow(0); 
+            newRow.innerHTML = `<td>${invoiceNumber}</td><td>2025-08-07</td><td>${clientName}</td><td>${amount.toFixed(2)} EUR</td><td><a href="#" class="link" onclick="openModal('modal-${orderId}')">#${orderId}</a></td><td><span class="status status-israsyta">Išsiųsta</span></td>`; 
+            const orderRow = document.getElementById('orders-table').querySelector('#order-row-' + orderId); 
+            if (orderRow) { 
+                orderRow.cells[0].innerHTML = `<span class="status status-uzbaigtas">Užbaigtas</span>`; 
+                orderRow.cells[7].textContent = invoiceNumber; 
+            } 
+            alert(`Sąskaita ${invoiceNumber} sėkmingai sugeneruota!`); 
+        }
+    </script>
+</body>
+</html>
