@@ -47,7 +47,11 @@
                     button: 'Prisijungti',
                     error: 'Neteisingas vardas arba slaptažodis.',
                     loggedInAs: 'Prisijungęs kaip',
-                    logout: 'Atsijungti'
+                    logout: 'Atsijungti',
+                    or: 'arba prisijunkite su',
+                    google: 'Prisijungti su Google',
+                    microsoft: 'Prisijungti su Microsoft',
+                    apple: 'Prisijungti su Apple'
                 },
                 tabs: {
                     orders: 'Užsakymai',
@@ -148,7 +152,11 @@
                     button: 'Log In',
                     error: 'Incorrect username or password.',
                     loggedInAs: 'Logged in as',
-                    logout: 'Logout'
+                    logout: 'Logout',
+                    or: 'or sign in with',
+                    google: 'Sign in with Google',
+                    microsoft: 'Sign in with Microsoft',
+                    apple: 'Sign in with Apple'
                 },
                 tabs: {
                     orders: 'Orders',
@@ -373,6 +381,11 @@
                 }
             };
 
+            const handleSocialLogin = () => {
+                // Simuliacija: prijungiame numatytąjį admin vartotoją
+                onLogin(users.find(u => u.username === 'admin'));
+            };
+
             return (
                 <div className="min-h-screen bg-gray-100 flex flex-col justify-center items-center">
                     <div className="bg-white shadow-md rounded-lg p-8 max-w-sm w-full">
@@ -410,6 +423,27 @@
                                 </button>
                             </div>
                         </form>
+
+                        <div className="my-6 flex items-center">
+                            <div className="flex-grow border-t border-gray-300"></div>
+                            <span className="flex-shrink mx-4 text-gray-400 text-sm">{t.login.or}</span>
+                            <div className="flex-grow border-t border-gray-300"></div>
+                        </div>
+
+                        <div className="space-y-3">
+                            <button onClick={handleSocialLogin} className="w-full flex items-center justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">
+                                <svg className="w-5 h-5 mr-2" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M43.611 20.083H42V20H24V28H35.303C33.674 32.69 29.223 36 24 36C18.477 36 14 31.523 14 26C14 20.477 18.477 16 24 16C26.46 16 28.696 16.952 30.45 18.522L36.85 12.122C33.43 9.11 29.02 7 24 7C14.61 7 7 14.61 7 24C7 33.39 14.61 41 24 41C33.39 41 41 33.39 41 24C41 22.62 40.836 21.35 40.52 20.155L43.611 20.083Z" fill="#FFC107"/><path d="M6.306 14.691L12.121 18.521C14.01 15.391 17.659 13 22 13C23.95 13 25.77 13.565 27.29 14.5L33.22 8.58C29.91 6.26 26.11 5 22 5C16.36 5 11.52 7.99 8.53 12.15L6.306 14.691Z" fill="#FF3D00"/><path d="M24 44C29.02 44 33.43 41.89 36.85 38.88L30.45 32.478C28.696 34.048 26.46 35 24 35C19.78 35 16.04 32.511 14.69 28.79L8.88 32.62C11.1 39.06 17.06 44 24 44Z" fill="#4CAF50"/><path d="M43.611 20.083H42V20H24V28H35.303C34.51 30.245 33.21 32.09 31.39 33.42L37.2 37.25C40.92 34.03 44 29.39 44 24C44 22.62 43.836 21.35 43.52 20.155L43.611 20.083Z" fill="#1976D2"/></svg>
+                                {t.login.google}
+                            </button>
+                            <button onClick={handleSocialLogin} className="w-full flex items-center justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">
+                                <svg className="w-5 h-5 mr-2" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1H9.5V9.5H1V1Z" fill="#F25022"/><path d="M11.5 1H20V9.5H11.5V1Z" fill="#7FBA00"/><path d="M1 11.5H9.5V20H1V11.5Z" fill="#00A4EF"/><path d="M11.5 11.5H20V20H11.5V11.5Z" fill="#FFB900"/></svg>
+                                {t.login.microsoft}
+                            </button>
+                             <button onClick={handleSocialLogin} className="w-full flex items-center justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">
+                                <svg className="w-5 h-5 mr-2" fill="#000000" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19.22 9.47a1.6 1.6 0 0 0-1.3-1.89 1.88 1.88 0 0 0-1.93 1.32A5.13 5.13 0 0 0 12 7.1a5 5 0 0 0-3.82 1.82 1.86 1.86 0 0 0-2-.83 1.68 1.68 0 0 0-1.39 1.89 4.71 4.71 0 0 0 1.1 3.28C4.41 15.1 3.82 17.35 3.82 17.35a3.78 3.78 0 0 0 3.21 2.37c1.4-.05 2.42-.83 3.94-.83s2.51.83 3.92.79a3.83 3.83 0 0 0 3.23-2.35s-.55-2.27-2-4.62a4.23 4.23 0 0 0 1.1-3.24zm-4.4-4.13a2.63 2.63 0 0 1 1.74-2.48 2.57 2.57 0 0 1 2.76 1.71 2.54 2.54 0 0 1-1.74 2.49 2.62 2.62 0 0 1-2.76-1.72z"/></svg>
+                                {t.login.apple}
+                            </button>
+                        </div>
                     </div>
                 </div>
             );
