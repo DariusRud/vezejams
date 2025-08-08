@@ -35,62 +35,207 @@
     <!-- React kodas su "text/babel" tipu -->
     <script type="text/babel">
         // ===================================================================================
-        // PAGRINDINIAI DUOMENYS - DABAR SU TEISINGA LOGIKA
+        // VERTIMAI
+        // ===================================================================================
+        const translations = {
+            lt: {
+                mainTitle: 'UŽSAKYMŲ VALDYMO SISTEMA',
+                tabs: {
+                    orders: 'Užsakymai',
+                    cmr: 'CMR Registras',
+                    purchaseInvoices: 'Pirkimo Sąskaitų Registras',
+                    accounting: 'Buhalterija',
+                    salesInvoices: 'Pardavimo Sąskaitų Registras',
+                },
+                summaryCards: {
+                    all: 'Iš viso',
+                    unsigned: 'Nepasirašyta',
+                    inProgress: 'Vykdomas',
+                    waitingForInvoice: 'Laukia pirk. sąsk.',
+                    waitingForCMR: 'Laukiama CMR',
+                    readyToInvoice: 'Galima išrašyti SF',
+                    completed: 'Užbaigtas',
+                },
+                orderTableHeaders: {
+                    status: 'Bendra Būsena',
+                    orderNo: 'Užsak. Nr.',
+                    date: 'Data',
+                    cargo: 'Krovinys',
+                    route: 'Maršrutas',
+                    carrier: 'Vežėjas',
+                    salesInvoiceNo: 'Pard. Sąsk. Nr.',
+                },
+                cmrTableHeaders: {
+                    cmrNo: 'CMR Numeris',
+                    receivedDate: 'Gavimo Data',
+                    relatedOrder: 'Susijęs Užsakymas',
+                    carrier: 'Vežėjas',
+                    relatedPurchaseInvoice: 'Susijusi pirkimo sąskaita',
+                    status: 'Statusas',
+                    view: 'Peržiūrėti',
+                },
+                purchaseInvoiceTableHeaders: {
+                    invoiceNo: 'Sąskaitos Nr.',
+                    date: 'Data',
+                    supplier: 'Tiekėjas',
+                    amount: 'Suma',
+                    relatedOrder: 'Susijęs Užsakymas',
+                    status: 'Statusas',
+                    view: 'Peržiūrėti',
+                },
+                accountingTableHeaders: {
+                    orderNo: 'Užsak. Nr.',
+                    client: 'Klientas',
+                    salesAmount: 'Pardavimo Suma (preliminari)',
+                    status: 'Statusas',
+                    action: 'Veiksmas',
+                    issue: 'Išrašyti',
+                },
+                salesInvoiceTableHeaders: {
+                    invoiceNo: 'Sąskaitos Nr.',
+                    date: 'Data',
+                    client: 'Klientas',
+                    amount: 'Suma',
+                    relatedOrder: 'Susijęs Užsakymas',
+                    status: 'Statusas',
+                },
+                modal: {
+                    orderDetails: 'Užsakymo Detalės',
+                    generalInfo: 'Bendra informacija',
+                    relatedDocs: 'Susiję Dokumentai',
+                    unsignedMsg: 'Negautas pasirašytas užsakymas iš vežėjo.',
+                    loadingDocs: 'Dokumentų informacija ruošiama...',
+                    cmr: 'CMR',
+                    purchaseInvoice: 'Pirkimo Sąskaita',
+                    salesInvoice: 'Pardavimo Sąskaita',
+                    status: 'Statusas',
+                    number: 'Numeris',
+                },
+                alerts: {
+                    viewingCMR: 'Atidaroma {id} CMR peržiūra...',
+                    viewingPurchaseInvoice: 'Čia atsidarys pirkimo sąskaitos \'{id}\' informacija.',
+                    viewingInvoice: 'Atidaroma {id} sąskaitos peržiūra...',
+                },
+                status: {
+                    uzbaigtas: 'Užbaigtas',
+                    patvirtinta: 'Patvirtinta',
+                    'laukia-cmr': 'Laukiama CMR',
+                    vykdomas: 'Vykdomas',
+                    nepasirasytas: 'Nepasirašyta',
+                    galima: 'Galima išrašyti SF',
+                    israsyta: 'Išrašyta',
+                    'laukia-saskaitos': 'Laukia pirk. sąsk.',
+                    neatpazinta: 'Neatpažinta',
+                    laukia: 'Laukiama',
+                    negalima: 'Negalima išrašyti',
+                }
+            },
+            en: {
+                mainTitle: 'ORDER MANAGEMENT SYSTEM',
+                tabs: {
+                    orders: 'Orders',
+                    cmr: 'CMR Registry',
+                    purchaseInvoices: 'Purchase Invoices Registry',
+                    accounting: 'Accounting',
+                    salesInvoices: 'Sales Invoices Registry',
+                },
+                summaryCards: {
+                    all: 'Total',
+                    unsigned: 'Unsigned',
+                    inProgress: 'In Progress',
+                    waitingForInvoice: 'Awaiting Invoice',
+                    waitingForCMR: 'Awaiting CMR',
+                    readyToInvoice: 'Ready to Invoice',
+                    completed: 'Completed',
+                },
+                orderTableHeaders: {
+                    status: 'Overall Status',
+                    orderNo: 'Order No.',
+                    date: 'Date',
+                    cargo: 'Cargo',
+                    route: 'Route',
+                    carrier: 'Carrier',
+                    salesInvoiceNo: 'Sales Inv. No.',
+                },
+                cmrTableHeaders: {
+                    cmrNo: 'CMR Number',
+                    receivedDate: 'Received Date',
+                    relatedOrder: 'Related Order',
+                    carrier: 'Carrier',
+                    relatedPurchaseInvoice: 'Related Purchase Invoice',
+                    status: 'Status',
+                    view: 'View',
+                },
+                 purchaseInvoiceTableHeaders: {
+                    invoiceNo: 'Invoice No.',
+                    date: 'Date',
+                    supplier: 'Supplier',
+                    amount: 'Amount',
+                    relatedOrder: 'Related Order',
+                    status: 'Status',
+                    view: 'View',
+                },
+                accountingTableHeaders: {
+                    orderNo: 'Order No.',
+                    client: 'Client',
+                    salesAmount: 'Sales Amount (preliminary)',
+                    status: 'Status',
+                    action: 'Action',
+                    issue: 'Issue',
+                },
+                salesInvoiceTableHeaders: {
+                    invoiceNo: 'Invoice No.',
+                    date: 'Date',
+                    client: 'Client',
+                    amount: 'Amount',
+                    relatedOrder: 'Related Order',
+                    status: 'Status',
+                },
+                modal: {
+                    orderDetails: 'Order Details',
+                    generalInfo: 'General Information',
+                    relatedDocs: 'Related Documents',
+                    unsignedMsg: 'Signed order from the carrier has not been received.',
+                    loadingDocs: 'Loading document information...',
+                    cmr: 'CMR',
+                    purchaseInvoice: 'Purchase Invoice',
+                    salesInvoice: 'Sales Invoice',
+                    status: 'Status',
+                    number: 'Number',
+                },
+                alerts: {
+                    viewingCMR: 'Opening view for CMR {id}...',
+                    viewingPurchaseInvoice: 'This would open the information for purchase invoice \'{id}\'.',
+                    viewingInvoice: 'Opening view for invoice {id}...',
+                },
+                status: {
+                    uzbaigtas: 'Completed',
+                    patvirtinta: 'Confirmed',
+                    'laukia-cmr': 'Awaiting CMR',
+                    vykdomas: 'In Progress',
+                    nepasirasytas: 'Unsigned',
+                    galima: 'Ready to Invoice',
+                    israsyta: 'Issued',
+                    'laukia-saskaitos': 'Awaiting Invoice',
+                    neatpazinta: 'Unrecognized',
+                    laukia: 'Awaiting',
+                    negalima: 'Not available',
+                }
+            }
+        };
+
+        // ===================================================================================
+        // DUOMENYS
         // ===================================================================================
         const initialOrders = [
-          // 1. Nepasirašyta: Nėra nieko, laukiama vežėjo parašo.
-          { 
-            id: 46266, status: 'nepasirasytas', date: '2025-07-30', cargo: 'biodiesel', route: 'Hamburg (DE) → Pagiriai (LT)', carrier: 'TPG-LOGISTIC', purchasePrice: 2000.00, salesInvoice: null, client: 'Klientas A' 
-            // Šiam statusui specialus modal lango vaizdas
-          },
-          // 2. Vykdomas: Yra parašas, bet nėra nei CMR, nei pirkimo sąskaitos.
-          { 
-            id: 46082, status: 'vykdomas', date: '2025-07-17', cargo: 'Equipment', route: 'Tilburg (NL) → San Pietro (IT)', carrier: 'E. Van Wijk Srl', purchasePrice: 1500.00, salesInvoice: null, client: 'Klientas B',
-            documents: {
-              cmr: { status: 'laukia' },
-              purchaseInvoice: { status: 'laukia' },
-              salesInvoice: { status: 'negalima' }
-            }
-          },
-          // 3. Laukiama CMR: Pirkimo sąskaita gauta, bet CMR ne.
-          { 
-            id: 45896, status: 'laukia-cmr', date: '2025-07-03', cargo: 'biodiesel', route: 'Usti n. Labem (CZ) → Rotterdam (NL)', carrier: 'UAB Viknetos logistika', purchasePrice: 1272.00, salesInvoice: null, client: 'HES Botlek Tank Terminal BV', 
-            documents: { 
-              cmr: { status: 'laukia' }, 
-              purchaseInvoice: { status: 'patvirtinta', number: 'VKL-2025/08/06' }, 
-              salesInvoice: { status: 'negalima' } 
-            } 
-          },
-          // 4. Laukiama Pirkimo sąskaitos: CMR gautas, bet pirkimo sąskaitos ne.
-          { 
-            id: 46148, status: 'laukia-saskaitos', date: '2025-07-22', cargo: 'biodyzelinas', route: 'Mainz (DE) → Pardubice (CZ)', carrier: 'EUROCORP TRADE s.r.o', purchasePrice: 1008.00, salesInvoice: null, client: 'Klientas C',
-            documents: {
-              cmr: { status: 'patvirtinta', number: 'DE-CZ-9988' },
-              purchaseInvoice: { status: 'laukia' },
-              salesInvoice: { status: 'negalima' }
-            }
-          },
-          // 5. Galima išrašyti SF: Gauta ir pirkimo sąskaita, ir CMR.
-          { 
-            id: 46027, status: 'galima', date: '2025-07-14', cargo: 'Nepavojinga chemija', route: 'Bozicany (CZ) → Viečiūnai (LT)', carrier: 'Nenurodyta', purchasePrice: 1200.00, salesInvoice: null, client: 'Raben Lietuva',
-            documents: {
-              cmr: { status: 'patvirtinta', number: 'DE5491/2025' },
-              purchaseInvoice: { status: 'patvirtinta', number: 'RAB-CZ-08/02' },
-              salesInvoice: { status: 'galima' }
-            }
-          },
-          // 6. Užbaigtas: Viskas gauta ir išrašyta pardavimo sąskaita.
-          { 
-            id: 46138, status: 'uzbaigtas', date: '2025-07-22', cargo: 'Biodyzelinas', route: 'Mainz (DE) → Dordrecht (NL)', carrier: 'UAB "Viknetos logistika"', purchasePrice: 1008.00, salesInvoice: 'URS-2025/08/01', client: 'TOTSA TotalEnergies',
-            documents: {
-              cmr: { status: 'patvirtinta', number: '3P1868/2025' },
-              purchaseInvoice: { status: 'patvirtinta', number: 'VKN nr 25/07/28' },
-              salesInvoice: { status: 'israsyta', number: 'URS-2025/08/01' }
-            }
-          }
+          { id: 46266, status: 'nepasirasytas', date: '2025-07-30', cargo: 'biodiesel', route: 'Hamburg (DE) → Pagiriai (LT)', carrier: 'TPG-LOGISTIC', purchasePrice: 2000.00, salesInvoice: null, client: 'Klientas A' },
+          { id: 46082, status: 'vykdomas', date: '2025-07-17', cargo: 'Equipment', route: 'Tilburg (NL) → San Pietro (IT)', carrier: 'E. Van Wijk Srl', purchasePrice: 1500.00, salesInvoice: null, client: 'Klientas B', documents: { cmr: { status: 'laukia' }, purchaseInvoice: { status: 'laukia' }, salesInvoice: { status: 'negalima' } } },
+          { id: 45896, status: 'laukia-cmr', date: '2025-07-03', cargo: 'biodiesel', route: 'Usti n. Labem (CZ) → Rotterdam (NL)', carrier: 'UAB Viknetos logistika', purchasePrice: 1272.00, salesInvoice: null, client: 'HES Botlek Tank Terminal BV', documents: { cmr: { status: 'laukia' }, purchaseInvoice: { status: 'patvirtinta', number: 'VKL-2025/08/06' }, salesInvoice: { status: 'negalima' } } },
+          { id: 46148, status: 'laukia-saskaitos', date: '2025-07-22', cargo: 'biodyzelinas', route: 'Mainz (DE) → Pardubice (CZ)', carrier: 'EUROCORP TRADE s.r.o', purchasePrice: 1008.00, salesInvoice: null, client: 'Klientas C', documents: { cmr: { status: 'patvirtinta', number: 'DE-CZ-9988' }, purchaseInvoice: { status: 'laukia' }, salesInvoice: { status: 'negalima' } } },
+          { id: 46027, status: 'galima', date: '2025-07-14', cargo: 'Nepavojinga chemija', route: 'Bozicany (CZ) → Viečiūnai (LT)', carrier: 'Nenurodyta', purchasePrice: 1200.00, salesInvoice: null, client: 'Raben Lietuva', documents: { cmr: { status: 'patvirtinta', number: 'DE5491/2025' }, purchaseInvoice: { status: 'patvirtinta', number: 'RAB-CZ-08/02' }, salesInvoice: { status: 'galima' } } },
+          { id: 46138, status: 'uzbaigtas', date: '2025-07-22', cargo: 'Biodyzelinas', route: 'Mainz (DE) → Dordrecht (NL)', carrier: 'UAB "Viknetos logistika"', purchasePrice: 1008.00, salesInvoice: 'URS-2025/08/01', client: 'TOTSA TotalEnergies', documents: { cmr: { status: 'patvirtinta', number: '3P1868/2025' }, purchaseInvoice: { status: 'patvirtinta', number: 'VKN nr 25/07/28' }, salesInvoice: { status: 'israsyta', number: 'URS-2025/08/01' } } }
         ];
 
-        // Duomenys registrams (palikti, kad veiktų atskiros lentelės)
         const cmrData = [
             { id: 'DE-CZ-9988', date: '2025-08-02', orderId: 46148, sender: 'ADM Mainz GmbH', carrier: 'EUROCORP TRADE s.r.o', purchaseInvoice: 'Negauta', status: 'patvirtinta' },
             { id: '3P1868/2025', date: '2025-07-28', orderId: 46138, sender: '3 FUEL 2020 SRL', carrier: 'UAB "Viknetos logistika"', purchaseInvoice: 'VKN nr 25/07/28', status: 'patvirtinta' },
@@ -105,39 +250,40 @@
         ];
 
         // Komponentas būsenos ženkliukui
-        const StatusBadge = ({ status }) => {
-          const statusConfig = {
-            uzbaigtas: { text: 'Užbaigtas', className: 'bg-green-500' },
-            patvirtinta: { text: 'Patvirtinta', className: 'bg-green-500' },
-            'laukia-cmr': { text: 'Laukiama CMR', className: 'bg-red-500' },
-            vykdomas: { text: 'Vykdomas', className: 'bg-orange-500' },
-            nepasirasytas: { text: 'Nepasirašyta', className: 'bg-gray-500' },
-            galima: { text: 'Galima išrašyti SF', className: 'bg-cyan-500' },
-            israsyta: { text: 'Išrašyta', className: 'bg-blue-500' },
-            'laukia-saskaitos': { text: 'Laukia pirk. sąsk.', className: 'bg-amber-500' },
-            neatpazinta: { text: 'Neatpažinta', className: 'bg-yellow-400 text-black' },
-            laukia: { text: 'Laukiama', className: 'bg-red-500' },
+        const StatusBadge = ({ status, t }) => {
+          const statusText = t.status[status] || status;
+          const statusColors = {
+            uzbaigtas: 'bg-green-500',
+            patvirtinta: 'bg-green-500',
+            'laukia-cmr': 'bg-red-500',
+            vykdomas: 'bg-orange-500',
+            nepasirasytas: 'bg-gray-500',
+            galima: 'bg-cyan-500',
+            israsyta: 'bg-blue-500',
+            'laukia-saskaitos': 'bg-amber-500',
+            neatpazinta: 'bg-yellow-400 text-black',
+            laukia: 'bg-red-500',
+            negalima: 'bg-gray-400',
           };
-          const config = statusConfig[status] || { text: status, className: 'bg-gray-400' };
+          const className = statusColors[status] || 'bg-gray-400';
           return (
-            <span className={`px-3 py-1 text-sm font-bold text-white rounded-full whitespace-nowrap ${config.className}`}>
-              {config.text}
+            <span className={`px-3 py-1 text-sm font-bold text-white rounded-full whitespace-nowrap ${className}`}>
+              {statusText}
             </span>
           );
         };
 
         // Komponentas modaliniam langui
-        const Modal = ({ order, onClose }) => {
+        const Modal = ({ order, onClose, t }) => {
           if (!order) return null;
 
-          // Pataisyta modalinio lango logika
           const renderDocuments = () => {
             if (order.status === 'nepasirasytas') {
-              return <p className="text-center text-gray-700 font-semibold">Negautas pasirašytas užsakymas iš vežėjo.</p>;
+              return <p className="text-center text-gray-700 font-semibold">{t.modal.unsignedMsg}</p>;
             }
 
             if (!order.documents) {
-                return <p className="text-center text-gray-600">Dokumentų informacija ruošiama...</p>;
+                return <p className="text-center text-gray-600">{t.modal.loadingDocs}</p>;
             }
             
             const { cmr, purchaseInvoice, salesInvoice } = order.documents;
@@ -145,19 +291,19 @@
             return (
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div className="bg-white p-4 rounded shadow-sm">
-                  <h4 className="font-bold mb-2">CMR</h4>
-                  <p><strong>Statusas:</strong> <StatusBadge status={cmr.status} /></p>
-                  {cmr.number && <p className="mt-2"><strong>Numeris:</strong> {cmr.number}</p>}
+                  <h4 className="font-bold mb-2">{t.modal.cmr}</h4>
+                  <p><strong>{t.modal.status}:</strong> <StatusBadge status={cmr.status} t={t}/></p>
+                  {cmr.number && <p className="mt-2"><strong>{t.modal.number}:</strong> {cmr.number}</p>}
                 </div>
                 <div className="bg-white p-4 rounded shadow-sm">
-                  <h4 className="font-bold mb-2">Pirkimo Sąskaita</h4>
-                  <p><strong>Statusas:</strong> <StatusBadge status={purchaseInvoice.status} /></p>
-                  {purchaseInvoice.number && <p className="mt-2"><strong>Numeris:</strong> {purchaseInvoice.number}</p>}
+                  <h4 className="font-bold mb-2">{t.modal.purchaseInvoice}</h4>
+                  <p><strong>{t.modal.status}:</strong> <StatusBadge status={purchaseInvoice.status} t={t}/></p>
+                  {purchaseInvoice.number && <p className="mt-2"><strong>{t.modal.number}:</strong> {purchaseInvoice.number}</p>}
                 </div>
                 <div className="bg-white p-4 rounded shadow-sm">
-                  <h4 className="font-bold mb-2">Pardavimo Sąskaita</h4>
-                  <p><strong>Statusas:</strong> <StatusBadge status={salesInvoice.status} /></p>
-                  {salesInvoice.number && <p className="mt-2"><strong>Numeris:</strong> {salesInvoice.number}</p>}
+                  <h4 className="font-bold mb-2">{t.modal.salesInvoice}</h4>
+                  <p><strong>{t.modal.status}:</strong> <StatusBadge status={salesInvoice.status} t={t}/></p>
+                  {salesInvoice.number && <p className="mt-2"><strong>{t.modal.number}:</strong> {salesInvoice.number}</p>}
                 </div>
               </div>
             );
@@ -167,19 +313,19 @@
             <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60" onClick={onClose}>
               <div className="bg-white rounded-lg shadow-2xl w-11/12 max-w-5xl mx-auto p-6 relative animate-slideIn" onClick={e => e.stopPropagation()}>
                 <button onClick={onClose} className="absolute text-3xl font-bold text-gray-400 top-4 right-6 hover:text-gray-600">&times;</button>
-                <h2 className="text-2xl font-bold text-gray-800 mb-6">Užsakymo #{order.id} Detalės</h2>
+                <h2 className="text-2xl font-bold text-gray-800 mb-6">{t.modal.orderDetails} #{order.id}</h2>
                 
                 <div className="bg-gray-50 p-5 border-l-4 border-blue-500 rounded-md">
-                  <h3 className="text-lg font-bold text-gray-700 mb-4">Bendra informacija</h3>
+                  <h3 className="text-lg font-bold text-gray-700 mb-4">{t.modal.generalInfo}</h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 text-sm">
-                    <p><strong>Krovinys:</strong> {order.cargo}</p>
-                    <p><strong>Maršrutas:</strong> {order.route}</p>
-                    <p><strong>Vežėjas:</strong> {order.carrier}</p>
+                    <p><strong>{t.orderTableHeaders.cargo}:</strong> {order.cargo}</p>
+                    <p><strong>{t.orderTableHeaders.route}:</strong> {order.route}</p>
+                    <p><strong>{t.orderTableHeaders.carrier}:</strong> {order.carrier}</p>
                   </div>
                 </div>
 
                 <div className="bg-gray-50 p-5 border-l-4 border-blue-500 rounded-md mt-6">
-                  <h3 className="text-lg font-bold text-gray-700 mb-4">Susiję Dokumentai</h3>
+                  <h3 className="text-lg font-bold text-gray-700 mb-4">{t.modal.relatedDocs}</h3>
                   {renderDocuments()}
                 </div>
               </div>
@@ -190,6 +336,7 @@
         // Pagrindinis aplikacijos komponentas
         function App() {
           const { useState, useEffect } = React;
+          const [language, setLanguage] = useState('lt');
           const [activeTab, setActiveTab] = useState('uzsakymai');
           const [orders, setOrders] = useState(initialOrders);
           const [filteredOrders, setFilteredOrders] = useState(initialOrders);
@@ -199,11 +346,13 @@
                   id: o.salesInvoice,
                   date: new Date().toISOString().slice(0, 10),
                   client: o.client,
-                  amount: o.purchasePrice * 1.2, // Pavyzdinis antkainis
+                  amount: o.purchasePrice * 1.2,
                   orderId: o.id,
                   status: 'israsyta'
               }))
           );
+          
+          const t = translations[language];
 
           const handleIssueInvoice = (orderId) => {
             const orderToUpdate = orders.find(o => o.id === orderId);
@@ -243,13 +392,13 @@
           }, [orders]);
 
           const summaryCards = [
-            { status: 'all', title: 'Iš viso' },
-            { status: 'nepasirasytas', title: 'Nepasirašyta' },
-            { status: 'vykdomas', title: 'Vykdomas' },
-            { status: 'laukia-saskaitos', title: 'Laukia pirk. sąsk.' },
-            { status: 'laukia-cmr', title: 'Laukiama CMR' },
-            { status: 'galima', title: 'Galima išrašyti SF' },
-            { status: 'uzbaigtas', title: 'Užbaigtas' },
+            { status: 'all', title: t.summaryCards.all },
+            { status: 'nepasirasytas', title: t.summaryCards.unsigned },
+            { status: 'vykdomas', title: t.summaryCards.inProgress },
+            { status: 'laukia-saskaitos', title: t.summaryCards.waitingForInvoice },
+            { status: 'laukia-cmr', title: t.summaryCards.waitingForCMR },
+            { status: 'galima', title: t.summaryCards.readyToInvoice },
+            { status: 'uzbaigtas', title: t.summaryCards.completed },
           ];
 
           const statusColors = {
@@ -263,17 +412,23 @@
           };
 
           const tabs = [
-            { id: 'uzsakymai', title: 'Užsakymai' },
-            { id: 'cmr', title: 'CMR Registras' },
-            { id: 'saskaitos', title: 'Pirkimo Sąskaitų Registras' },
-            { id: 'buhalterija', title: 'Buhalterija' },
-            { id: 'pardavimai', title: 'Pardavimo Sąskaitų Registras' },
+            { id: 'uzsakymai', title: t.tabs.orders },
+            { id: 'cmr', title: t.tabs.cmr },
+            { id: 'saskaitos', title: t.tabs.purchaseInvoices },
+            { id: 'buhalterija', title: t.tabs.accounting },
+            { id: 'pardavimai', title: t.tabs.salesInvoices },
           ];
 
           return (
             <div className="bg-gray-100 min-h-screen font-sans">
               <div className="container mx-auto p-4 sm:p-6 lg:p-8">
-                <h1 className="text-3xl font-bold text-center text-gray-800 mb-6">UŽSAKYMŲ VALDYMO SISTEMA</h1>
+                <div className="relative text-center">
+                    <h1 className="text-3xl font-bold text-gray-800 mb-6">{t.mainTitle}</h1>
+                    <div className="absolute top-0 right-0">
+                        <button onClick={() => setLanguage('lt')} className={`px-3 py-1 text-sm font-bold rounded-l-md ${language === 'lt' ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-700'}`}>LT</button>
+                        <button onClick={() => setLanguage('en')} className={`px-3 py-1 text-sm font-bold rounded-r-md ${language === 'en' ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-700'}`}>EN</button>
+                    </div>
+                </div>
                 
                 <nav className="flex flex-wrap border-b-2 border-gray-200">
                   {tabs.map(tab => (
@@ -290,7 +445,7 @@
                 <div className="mt-8">
                   {activeTab === 'uzsakymai' && (
                     <div>
-                      <h2 className="text-2xl font-bold text-gray-700 mb-4">Visi Užsakymai</h2>
+                      <h2 className="text-2xl font-bold text-gray-700 mb-4">{t.tabs.orders}</h2>
                       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-4 mb-6">
                         {summaryCards.map(card => (
                           <div key={card.status} onClick={() => filterOrdersByStatus(card.status)} className={`bg-white p-4 rounded-lg shadow-md cursor-pointer border-l-4 transition hover:shadow-lg hover:-translate-y-1 ${statusColors[card.status]}`}>
@@ -305,19 +460,19 @@
                         <table className="w-full text-sm text-left text-gray-600">
                           <thead className="bg-gray-50 text-xs text-gray-700 uppercase">
                             <tr>
-                              <th className="p-3">Bendra Būsena</th>
-                              <th className="p-3">Užsak. Nr.</th>
-                              <th className="p-3">Data</th>
-                              <th className="p-3">Krovinys</th>
-                              <th className="p-3">Maršrutas</th>
-                              <th className="p-3">Vežėjas</th>
-                              <th className="p-3">Pard. Sąsk. Nr.</th>
+                              <th className="p-3">{t.orderTableHeaders.status}</th>
+                              <th className="p-3">{t.orderTableHeaders.orderNo}</th>
+                              <th className="p-3">{t.orderTableHeaders.date}</th>
+                              <th className="p-3">{t.orderTableHeaders.cargo}</th>
+                              <th className="p-3">{t.orderTableHeaders.route}</th>
+                              <th className="p-3">{t.orderTableHeaders.carrier}</th>
+                              <th className="p-3">{t.orderTableHeaders.salesInvoiceNo}</th>
                             </tr>
                           </thead>
                           <tbody>
                             {filteredOrders.map(order => (
                               <tr key={order.id} onClick={() => setSelectedOrder(order)} className="bg-white border-b hover:bg-gray-50 cursor-pointer">
-                                <td className="p-3"><StatusBadge status={order.status} /></td>
+                                <td className="p-3"><StatusBadge status={order.status} t={t} /></td>
                                 <td className="p-3 font-medium text-gray-900">#{order.id}</td>
                                 <td className="p-3">{order.date}</td>
                                 <td className="p-3">{order.cargo}</td>
@@ -334,17 +489,17 @@
                   
                   {activeTab === 'cmr' && (
                      <div className="bg-white p-4 rounded-lg shadow-md overflow-x-auto">
-                        <h2 className="text-2xl font-bold text-gray-700 mb-4">Gautų CMR Registras</h2>
+                        <h2 className="text-2xl font-bold text-gray-700 mb-4">{t.tabs.cmr}</h2>
                         <table className="w-full text-sm text-left text-gray-600">
                           <thead className="bg-gray-50 text-xs text-gray-700 uppercase">
                             <tr>
-                                <th className="p-3">CMR Numeris</th>
-                                <th className="p-3">Gavimo Data</th>
-                                <th className="p-3">Susijęs Užsakymas</th>
-                                <th className="p-3">Vežėjas</th>
-                                <th className="p-3">Susijusi pirkimo sąskaita</th>
-                                <th className="p-3">Statusas</th>
-                                <th className="p-3 text-center">Peržiūrėti</th>
+                                <th className="p-3">{t.cmrTableHeaders.cmrNo}</th>
+                                <th className="p-3">{t.cmrTableHeaders.receivedDate}</th>
+                                <th className="p-3">{t.cmrTableHeaders.relatedOrder}</th>
+                                <th className="p-3">{t.cmrTableHeaders.carrier}</th>
+                                <th className="p-3">{t.cmrTableHeaders.relatedPurchaseInvoice}</th>
+                                <th className="p-3">{t.cmrTableHeaders.status}</th>
+                                <th className="p-3 text-center">{t.cmrTableHeaders.view}</th>
                             </tr>
                           </thead>
                           <tbody>
@@ -355,30 +510,19 @@
                                     <td className="p-3">
                                       {cmr.orderId ? (
                                         <a href="#" onClick={(e) => { e.preventDefault(); setSelectedOrder(orders.find(o => o.id === cmr.orderId))}} className="text-blue-600 hover:underline">#{cmr.orderId}</a>
-                                      ) : (
-                                        '-'
-                                      )}
+                                      ) : ('-')}
                                     </td>
                                     <td className="p-3">{cmr.carrier}</td>
                                     <td className="p-3">
                                       {cmr.purchaseInvoice !== 'Negauta' && cmr.purchaseInvoice !== 'Nėra' ? (
-                                        <a 
-                                          href="#" 
-                                          onClick={(e) => {
-                                            e.preventDefault();
-                                            alert(`Čia atsidarys pirkimo sąskaitos '${cmr.purchaseInvoice}' informacija.`);
-                                          }}
-                                          className="text-blue-600 hover:underline"
-                                        >
+                                        <a href="#" onClick={(e) => { e.preventDefault(); alert(t.alerts.viewingPurchaseInvoice.replace('{id}', cmr.purchaseInvoice)); }} className="text-blue-600 hover:underline">
                                           {cmr.purchaseInvoice}
                                         </a>
-                                      ) : (
-                                        cmr.purchaseInvoice
-                                      )}
+                                      ) : (cmr.purchaseInvoice)}
                                     </td>
-                                    <td className="p-3"><StatusBadge status={cmr.status} /></td>
+                                    <td className="p-3"><StatusBadge status={cmr.status} t={t}/></td>
                                     <td className="p-3 text-center">
-                                        <a href="#" onClick={(e) => { e.preventDefault(); alert(`Atidaroma ${cmr.id} CMR peržiūra...`); }} className="text-xl text-gray-500 hover:text-blue-600" title="Peržiūrėti dokumentą">&#128269;</a>
+                                        <a href="#" onClick={(e) => { e.preventDefault(); alert(t.alerts.viewingCMR.replace('{id}', cmr.id)); }} className="text-xl text-gray-500 hover:text-blue-600" title={t.cmrTableHeaders.view}>&#128269;</a>
                                     </td>
                                 </tr>
                             ))}
@@ -389,17 +533,17 @@
 
                   {activeTab === 'saskaitos' && (
                      <div className="bg-white p-4 rounded-lg shadow-md overflow-x-auto">
-                        <h2 className="text-2xl font-bold text-gray-700 mb-4">Gautų Pirkimo Sąskaitų Registras</h2>
+                        <h2 className="text-2xl font-bold text-gray-700 mb-4">{t.tabs.purchaseInvoices}</h2>
                         <table className="w-full text-sm text-left text-gray-600">
                           <thead className="bg-gray-50 text-xs text-gray-700 uppercase">
                             <tr>
-                                <th className="p-3">Sąskaitos Nr.</th>
-                                <th className="p-3">Data</th>
-                                <th className="p-3">Tiekėjas</th>
-                                <th className="p-3">Suma</th>
-                                <th className="p-3">Susijęs Užsakymas</th>
-                                <th className="p-3">Statusas</th>
-                                <th className="p-3 text-center">Peržiūrėti</th>
+                                <th className="p-3">{t.purchaseInvoiceTableHeaders.invoiceNo}</th>
+                                <th className="p-3">{t.purchaseInvoiceTableHeaders.date}</th>
+                                <th className="p-3">{t.purchaseInvoiceTableHeaders.supplier}</th>
+                                <th className="p-3">{t.purchaseInvoiceTableHeaders.amount}</th>
+                                <th className="p-3">{t.purchaseInvoiceTableHeaders.relatedOrder}</th>
+                                <th className="p-3">{t.purchaseInvoiceTableHeaders.status}</th>
+                                <th className="p-3 text-center">{t.purchaseInvoiceTableHeaders.view}</th>
                             </tr>
                           </thead>
                           <tbody>
@@ -410,9 +554,9 @@
                                     <td className="p-3">{inv.supplier}</td>
                                     <td className="p-3">{inv.amount.toFixed(2)} EUR</td>
                                     <td className="p-3">{inv.orderId ? <a href="#" onClick={(e) => { e.preventDefault(); setSelectedOrder(orders.find(o => o.id === inv.orderId))}} className="text-blue-600 hover:underline">#{inv.orderId}</a> : '-'}</td>
-                                    <td className="p-3"><StatusBadge status={inv.status} /></td>
+                                    <td className="p-3"><StatusBadge status={inv.status} t={t}/></td>
                                     <td className="p-3 text-center">
-                                        <a href="#" onClick={(e) => { e.preventDefault(); alert(`Atidaroma ${inv.id} sąskaitos peržiūra...`); }} className="text-xl text-gray-500 hover:text-blue-600" title="Peržiūrėti dokumentą">&#128269;</a>
+                                        <a href="#" onClick={(e) => { e.preventDefault(); alert(t.alerts.viewingInvoice.replace('{id}', inv.id)); }} className="text-xl text-gray-500 hover:text-blue-600" title={t.purchaseInvoiceTableHeaders.view}>&#128269;</a>
                                     </td>
                                 </tr>
                             ))}
@@ -423,15 +567,15 @@
 
                   {activeTab === 'buhalterija' && (
                     <div className="bg-white p-4 rounded-lg shadow-md overflow-x-auto">
-                        <h2 className="text-2xl font-bold text-gray-700 mb-4">Buhalterijos Skydelis</h2>
+                        <h2 className="text-2xl font-bold text-gray-700 mb-4">{t.tabs.accounting}</h2>
                         <table className="w-full text-sm text-left text-gray-600">
                             <thead className="bg-gray-50 text-xs text-gray-700 uppercase">
                                 <tr>
-                                    <th className="p-3">Užsak. Nr.</th>
-                                    <th className="p-3">Klientas</th>
-                                    <th className="p-3">Pardavimo Suma (preliminari)</th>
-                                    <th className="p-3">Statusas</th>
-                                    <th className="p-3">Veiksmas</th>
+                                    <th className="p-3">{t.accountingTableHeaders.orderNo}</th>
+                                    <th className="p-3">{t.accountingTableHeaders.client}</th>
+                                    <th className="p-3">{t.accountingTableHeaders.salesAmount}</th>
+                                    <th className="p-3">{t.accountingTableHeaders.status}</th>
+                                    <th className="p-3">{t.accountingTableHeaders.action}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -440,10 +584,10 @@
                                         <td className="p-3"><a href="#" onClick={(e) => { e.preventDefault(); setSelectedOrder(order)}} className="text-blue-600 hover:underline">#{order.id}</a></td>
                                         <td className="p-3">{order.client}</td>
                                         <td className="p-3">{(order.purchasePrice * 1.2).toFixed(2)} EUR</td>
-                                        <td className="p-3"><StatusBadge status={order.status === 'uzbaigtas' ? 'israsyta' : 'galima'} /></td>
+                                        <td className="p-3"><StatusBadge status={order.status === 'uzbaigtas' ? 'israsyta' : 'galima'} t={t}/></td>
                                         <td className="p-3">
                                             {order.status === 'galima' ? (
-                                                <button onClick={() => handleIssueInvoice(order.id)} className="bg-blue-600 text-white px-3 py-1 rounded-md hover:bg-blue-700 text-xs font-bold">Išrašyti</button>
+                                                <button onClick={() => handleIssueInvoice(order.id)} className="bg-blue-600 text-white px-3 py-1 rounded-md hover:bg-blue-700 text-xs font-bold">{t.accountingTableHeaders.issue}</button>
                                             ) : (
                                                 <strong>{order.salesInvoice}</strong>
                                             )}
@@ -457,16 +601,16 @@
 
                   {activeTab === 'pardavimai' && (
                     <div className="bg-white p-4 rounded-lg shadow-md overflow-x-auto">
-                        <h2 className="text-2xl font-bold text-gray-700 mb-4">Pardavimo Sąskaitų Registras</h2>
+                        <h2 className="text-2xl font-bold text-gray-700 mb-4">{t.tabs.salesInvoices}</h2>
                         <table className="w-full text-sm text-left text-gray-600">
                             <thead className="bg-gray-50 text-xs text-gray-700 uppercase">
                                 <tr>
-                                    <th className="p-3">Sąskaitos Nr.</th>
-                                    <th className="p-3">Data</th>
-                                    <th className="p-3">Klientas</th>
-                                    <th className="p-3">Suma</th>
-                                    <th className="p-3">Susijęs Užsakymas</th>
-                                    <th className="p-3">Statusas</th>
+                                    <th className="p-3">{t.salesInvoiceTableHeaders.invoiceNo}</th>
+                                    <th className="p-3">{t.salesInvoiceTableHeaders.date}</th>
+                                    <th className="p-3">{t.salesInvoiceTableHeaders.client}</th>
+                                    <th className="p-3">{t.salesInvoiceTableHeaders.amount}</th>
+                                    <th className="p-3">{t.salesInvoiceTableHeaders.relatedOrder}</th>
+                                    <th className="p-3">{t.salesInvoiceTableHeaders.status}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -477,7 +621,7 @@
                                         <td className="p-3">{inv.client}</td>
                                         <td className="p-3">{inv.amount.toFixed(2)} EUR</td>
                                         <td className="p-3"><a href="#" onClick={(e) => { e.preventDefault(); setSelectedOrder(orders.find(o => o.id === inv.orderId))}} className="text-blue-600 hover:underline">#{inv.orderId}</a></td>
-                                        <td className="p-3"><StatusBadge status={inv.status} /></td>
+                                        <td className="p-3"><StatusBadge status={inv.status} t={t}/></td>
                                     </tr>
                                 ))}
                             </tbody>
@@ -487,7 +631,7 @@
 
                 </div>
                 
-                <Modal order={selectedOrder} onClose={() => setSelectedOrder(null)} />
+                <Modal order={selectedOrder} onClose={() => setSelectedOrder(null)} t={t} />
               </div>
             </div>
           );
